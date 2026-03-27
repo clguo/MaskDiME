@@ -49,7 +49,6 @@ MODEL_FLAGS="--attention_resolutions 32,16,8 \
 
 SAMPLE_FLAGS="--batch_size 50 --timestep_respacing 200"
 
-# -------- 路径配置 --------
 DATAPATH="dataset/CelebA"
 OUTPUT_PATH="CelebA/MaskDiME/smile/"
 MODELPATH="DiME/models/ddpm-celeba.pt"
@@ -57,7 +56,6 @@ CLASSIFIERPATH="DiME/models/classifier.pth"
 ORACLEPATH="DiME/models/oracle.pth"
 EXPNAME="exp/name"
 
-# -------- 采样参数 --------
 GPU=0
 S=60
 SEED=4
@@ -78,7 +76,7 @@ TOPKRATIO=0.05
 XTRATE=0.5
 
 
-# -------- 组合并执行 --------
+
 python -W ignore maskdime4celeba.py \
   $MODEL_FLAGS $SAMPLE_FLAGS \
   --query_label $QUERYLABEL \

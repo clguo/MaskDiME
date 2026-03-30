@@ -162,7 +162,7 @@ If you found useful our code, please cite our work.
 @article{guo2026maskdime,
   title={MaskDiME: Adaptive Masked Diffusion for Precise and Efficient Visual Counterfactual Explanations},
   author={Guo, Changlu and Christensen, Anders Nymark and Dahl, Anders Bjorholm and Hannemose, Morten Rieger},
-  journal={ journal={Proceedings of the IEEE/CVF conference on Computer Vision and Pattern Recognition},
+  journal={Proceedings of the IEEE/CVF conference on Computer Vision and Pattern Recognition},
   year={2026}
 }
 ``` 

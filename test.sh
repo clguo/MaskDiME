@@ -3,7 +3,7 @@ source activate maskdime
 
 module load gcc/10.5.0-binutils-2.40
 module load mpi/4.0.7-gcc-10.5.0-binutils-2.40
-# -------- 模型配置 --------
+
 MODEL_FLAGS="--attention_resolutions 32,16,8 \
              --class_cond False \
              --diffusion_steps 500 \
@@ -20,15 +20,15 @@ MODEL_FLAGS="--attention_resolutions 32,16,8 \
 
 SAMPLE_FLAGS="--batch_size 50 --timestep_respacing 200"
 
-# -------- 路径配置 --------
-DATAPATH="/work3/chagu/extraspace/dataset/CelebA"
-OUTPUT_PATH="/work3/chagu/extraspace/cvpr/CelebA/MaskDiME/smile/ablation/maskdime"
-MODELPATH="/zhome/53/8/212865/projects/counterfactual/DiME/models/ddpm-celeba.pt"
-CLASSIFIERPATH="/zhome/53/8/212865/projects/counterfactual/DiME/models/classifier.pth"
-ORACLEPATH="/zhome/53/8/212865/projects/counterfactual/DiME/models/oracle.pth"
+
+DATAPATH="dataset/CelebA"
+OUTPUT_PATH="maskdime"
+MODELPATH="DiME/models/ddpm-celeba.pt"
+CLASSIFIERPATH="DiME/models/classifier.pth"
+ORACLEPATH="DiME/models/oracle.pth"
 EXPNAME="exp/name"
 
-# -------- 采样参数 --------
+
 GPU=0
 S=60
 SEED=4

@@ -83,7 +83,6 @@ TOPKRATIO=0.05
 XTRATE=0.5
 
 
-# -------- 组合并执行 --------
 python -W ignore main.py \
   $MODEL_FLAGS $SAMPLE_FLAGS \
   --query_label $QUERYLABEL \

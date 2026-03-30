@@ -21,11 +21,11 @@ MODEL_FLAGS="--attention_resolutions 32,16,8 \
 SAMPLE_FLAGS="--batch_size 50 --timestep_respacing 200"
 
 # -------- 路径配置 --------
-DATAPATH="dataset/CelebA"
-OUTPUT_PATH="CelebA/MaskDiME/smile/"
-MODELPATH="DiME/models/ddpm-celeba.pt"
-CLASSIFIERPATH="DiME/models/classifier.pth"
-ORACLEPATH="DiME/models/oracle.pth"
+DATAPATH="/work3/chagu/extraspace/dataset/CelebA"
+OUTPUT_PATH="/work3/chagu/extraspace/cvpr/CelebA/MaskDiME/smile/ablation/maskdime"
+MODELPATH="/zhome/53/8/212865/projects/counterfactual/DiME/models/ddpm-celeba.pt"
+CLASSIFIERPATH="/zhome/53/8/212865/projects/counterfactual/DiME/models/classifier.pth"
+ORACLEPATH="/zhome/53/8/212865/projects/counterfactual/DiME/models/oracle.pth"
 EXPNAME="exp/name"
 
 # -------- 采样参数 --------
@@ -50,7 +50,7 @@ XTRATE=0.5
 
 
 # -------- 组合并执行 --------
-python -W ignore maskdime4celeba.py \
+python -W ignore main.py \
   $MODEL_FLAGS $SAMPLE_FLAGS \
   --query_label $QUERYLABEL \
   --target_label $TARGETLABEL \

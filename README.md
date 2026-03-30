@@ -1,4 +1,4 @@
-# DiME's official code
+# MaskDiME's official code
 
 This is the codebase for the **CVPR 2026**  paper [MaskDiME: Adaptive Masked Diffusion for Precise and Efficient Visual Counterfactual Explanations]([https://arxiv.org/abs/2203.15636](https://arxiv.org/abs/2602.18792)).
 

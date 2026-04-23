@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="MaskDiME: Adaptive Masked Diffusion for Precise and Efficient Visual Counterfactual Explanations.">
+  <meta name="keywords" content="MaskDiME, Counterfactual Explanations, Diffusion Models, CVPR 2026">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MaskDiME: Adaptive Masked Diffusion</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://cvpr.thecvf.com/">
+        <img src="./images/cvpr-navbar-logo.svg?v=3" alt="CVPR 2026" style="max-height: 40px;">
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <!-- <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://github.com/clguo/MaskDiME">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+
+    </div>
+
+  </div> -->
+  <!-- </nav> --> -->
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MaskDiME: Adaptive Masked Diffusion for Precise and Efficient
+              Visual Counterfactual Explanations</h1>
+            <div class="publication-venue"
+              style="display: flex; justify-content: center; width: 100%; margin-bottom: 25px;">
+              <img src="./images/cvpr-navbar-logo.svg?v=3" alt="CVPR Logo" style="height: 80px;">
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=y6XNTKEAAAAJ&hl=en" target="_blank">Changlu Guo</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=bkWG4OYAAAAJ&hl=da" target="_blank">Anders Nymark Christensen</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=WsgfNRMAAAAJ&hl=da" target="_blank">Anders Bjorholm Dahl</a>,
+              </span>
+              <span class="author-block">
+                <a href="https://mortenhannemose.github.io/" target="_blank">Morten Rieger Hannemose</a>
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">Technical University of Denmark</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2602.18792.pdf"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2602.18792" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/clguo/MaskDiME" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <img id="teaser" src="./images/teaser.png" alt="MaskDiME Teaser"
+          style="max-width: 80%; margin: 0 auto; display: block;">
+        <h2 class="subtitle has-text-centered" style="margin-top: 15px;">
+          <span class="dnerf">MaskDiME</span> adaptively focuses on decision-relevant regions to generate precise and
+          semantically consistent counterfactual explanations while preserving high image fidelity.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Visual counterfactual explanations aim to reveal the minimal semantic modifications that can alter a
+              model's prediction, providing causal and interpretable insights into deep neural networks.
+            </p>
+            <p>
+              However, existing diffusion-based counterfactual generation methods are often computationally expensive,
+              slow to sample, and imprecise in localizing the modified regions. To address these limitations, we propose
+              MaskDiME, a simple, fast, yet effective diffusion framework that unifies semantic consistency and spatial
+              precision through localized sampling.
+            </p>
+            <p>
+              Our approach adaptively focuses on decision-relevant regions to achieve localized and semantically
+              consistent counterfactual generation while preserving high image fidelity. Our training-free framework,
+              MaskDiME, performs inference over <strong>30x faster</strong> than the baseline and achieves comparable or
+              state-of-the-art performance across five benchmark datasets spanning diverse visual domains, establishing
+              a practical and generalizable solution for efficient counterfactual explanation.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Method Overview. -->
+      <div class="columns is-centered has-text-centered" style="margin-top: 30px;">
+        <div class="column is-full">
+          <h2 class="title is-3">Method Overview</h2>
+          <div class="publication-image">
+            <img src="./images/overview.png" alt="MaskDiME Method Overview" style="width: 100%;">
+          </div>
+          <div class="content has-text-justified" style="margin-top: 15px;">
+            <p>
+              Overview of our framework: Given an input image, MaskDiME first employs an attribution method to locate
+              the decision-relevant regions, which are then used to generate a region-specific mask. We then perform a
+              targeted diffusion generation process directed by semantic manipulations, yielding highly precise and
+              realistic counterfactuals.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Method Overview. -->
+    </div>
+  </section>
+
+
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-3 has-text-centered" style="margin-bottom: 20px;">Visual Counterfactuals</h2>
+        <style>
+          .custom-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding: 10px 0;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+          }
+
+          .custom-slider::-webkit-scrollbar {
+            height: 8px;
+          }
+
+          .custom-slider::-webkit-scrollbar-track {
+            background: transparent;
+          }
+
+          .custom-slider::-webkit-scrollbar-thumb {
+            background: #d4d4d4;
+            border-radius: 4px;
+          }
+
+          .custom-slider .item {
+            scroll-snap-align: center;
+            flex: 0 0 auto;
+          }
+
+          .custom-slider img {
+            height: 500px;
+            width: auto;
+            display: block;
+            border-radius: 6px;
+          }
+
+          .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          }
+        </style>
+
+        <div style="position: relative; max-width: 100%; margin: 0 auto;">
+          <button id="slideLeft" class="button is-white slider-btn" style="left: -20px;">&#10094;</button>
+
+          <div id="results-slider" class="custom-slider">
+            <div class="item">
+              <img src="./images/appendix_smile.png" alt="Visual Results Smile">
+            </div>
+            <div class="item">
+              <img src="./images/appendix_hq1.png" alt="Visual Results HQ">
+            </div>
+            <div class="item">
+              <img src="./images/visualresultsfinal_cvpr.png" alt="Visual Results CVPR">
+            </div>
+            <div class="item">
+              <img src="./images/appendix_hqage.png" alt="Visual Results HQ Age">
+            </div>
+            <div class="item">
+              <img src="./images/appendix_age.png" alt="Visual Results Age">
+            </div>
+          </div>
+
+          <button id="slideRight" class="button is-white slider-btn" style="right: -20px;">&#10095;</button>
+        </div>
+
+        <script>
+          document.getElementById('slideLeft').onclick = function () {
+            document.getElementById('results-slider').scrollBy({ left: -600, behavior: 'smooth' });
+          };
+          document.getElementById('slideRight').onclick = function () {
+            document.getElementById('results-slider').scrollBy({ left: 600, behavior: 'smooth' });
+          };
+
+          // Wait briefly for images to load, then scroll to the middle item (item index 2)
+          window.addEventListener('load', function () {
+            setTimeout(() => {
+              const slider = document.getElementById('results-slider');
+              const targetItem = slider.querySelectorAll('.item')[2];
+              if (targetItem) {
+                const scrollPos = targetItem.offsetLeft - (slider.clientWidth / 2) + (targetItem.clientWidth / 2);
+                slider.scrollTo({ left: scrollPos, behavior: 'smooth' });
+              }
+            }, 300);
+          });
+        </script>
+        <p class="has-text-centered" style="margin-top: 15px; font-size: 0.9em; color: #555;">(Use the arrows to slide
+          through various qualitative results across different datasets)</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <div class="columns" style="align-items: stretch;">
+        <!-- Efficiency. -->
+        <div class="column" style="flex: 1.84; display: flex; flex-direction: column;">
+          <div class="content" style="flex-grow: 1; display: flex; flex-direction: column;">
+            <h2 class="title is-3">Efficiency</h2>
+            <p style="flex-grow: 1;">
+              MaskDiME showcases remarkable speedups. Our training-free inference executes over 30x faster than
+              competitive baselines while maintaining top-tier image fidelity.
+            </p>
+            <img src="./images/efficiency.png" alt="Efficiency results"
+              style="width: 100%; height: auto; display: block; margin-top: auto;">
+          </div>
+        </div>
+        <!--/ Efficiency. -->
+
+        <!-- Ablation Study. -->
+        <div class="column" style="flex: 3.24; display: flex; flex-direction: column;">
+          <div class="content" style="flex-grow: 1; display: flex; flex-direction: column;">
+            <h2 class="title is-3">Ablation Study</h2>
+            <p style="flex-grow: 1;">
+              We methodically validate each component of our adaptive masked diffusion framework. As demonstrated, gradient scaling and adaptive spatial masking strongly complement each other: the former controls classifier guidance strength, while the latter enforces precise, semantically coherent edits that preserve authentic image fidelity.
+            </p>
+            <img src="./images/ablationstudy_new.png" alt="Ablation results"
+              style="width: 100%; height: auto; display: block; margin-top: auto;">
+          </div>
+        </div>
+      </div>
+      <!--/ Ablation Study. -->
+
+      <!-- Heatmaps. -->
+      <div class="columns is-centered" style="margin-top: 30px;">
+        <div class="column is-full-width">
+          <h2 class="title is-3 has-text-centered">Attribution Heatmaps</h2>
+          <div class="content has-text-justified">
+            <p>
+              To validate the interaction between classifier guidance and diffusion dynamics, we visualize the evolution
+              of noisy samples under different masking strategies.
+              The per-timestep heatmaps (where red indicates stronger updates) show that our Adaptive Dual-mask adjusts
+              its spatial focus at each diffusion step based on classifier gradients.
+              This guides the model toward decision-relevant regions, producing spatially coherent counterfactual
+              trajectories with fewer irrelevant perturbations.
+            </p>
+          </div>
+          <div class="content has-text-centered">
+            <img src="./images/heatmaps.png" alt="Heatmaps visualization" style="max-width: 80%;">
+          </div>
+        </div>
+      </div>
+      <!--/ Heatmaps. -->
+
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>@inproceedings{guo2026maskdime,
+  author    = {Guo, Changlu and Christensen, Anders Nymark and Dahl, Anders Bjorholm and Hannemose, Morten Rieger},
+  title     = {MaskDiME: Adaptive Masked Diffusion for Precise and Efficient Visual Counterfactual Explanations},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2026},
+}</code></pre>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://arxiv.org/pdf/2602.18792.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/clguo/MaskDiME" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p>
+              This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                code</a> of this website,
+              we just ask that you link back to this page in the footer.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

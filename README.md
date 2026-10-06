@@ -1,6 +1,8 @@
 # MaskDiME's official code (CVPR 2026)
 
-This is the codebase for the paper [MaskDiME: Adaptive Masked Diffusion for Precise and Efficient Visual Counterfactual Explanations]([https://arxiv.org/abs/2203.15636](https://arxiv.org/abs/2602.18792)).
+This is the official codebase for **MaskDiME: Adaptive Masked Diffusion for Precise and Efficient Visual Counterfactual Explanations**.
+
+**[Paper (CVPR 2026)](https://openaccess.thecvf.com/content/CVPR2026/html/Guo_MaskDiME_Adaptive_Masked_Diffusion_for_Precise_and_Efficient_Visual_Counterfactual_CVPR_2026_paper.html) | [Project Page](https://clguo.github.io/MaskDiME/) | [arXiv](https://arxiv.org/abs/2602.18792)**
 
 ## Environment
 
